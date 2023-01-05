@@ -1,18 +1,8 @@
 defmodule ExAzureVision do
+  @moduledoc since: "0.1.0"
   @moduledoc """
-  Documentation for `ExAzureVision`.
+  Public API functions to interact with Azure Computer Vision.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ExAzureVision.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  defdelegate analyze(image_url, query_params), to: ExAzureVision.ImageAnalysis
 end
