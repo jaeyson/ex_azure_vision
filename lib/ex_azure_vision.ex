@@ -4,5 +4,5 @@ defmodule ExAzureVision do
   Public API functions to interact with Azure Computer Vision.
   """
 
-  defdelegate analyze(image_url, query_params), to: ExAzureVision.ImageAnalysis
+  defdelegate analyze(image_url, query), to: ExAzureVision.ImageAnalysis
 end

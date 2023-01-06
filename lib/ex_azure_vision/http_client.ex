@@ -1,47 +1,36 @@
 defmodule ExAzureVision.HttpClient do
   @moduledoc false
+  # use Tesla
 
   def header_name, do: Application.get_env(:ex_azure_vision, :header_name)
   def subscription_key, do: Application.get_env(:ex_azure_vision, :subscription_key)
   def base_url, do: Application.get_env(:ex_azure_vision, :base_url)
   def scheme, do: Application.get_env(:ex_azure_vision, :scheme)
-  def path, do: Application.get_env(:ex_azure_vision, :path)
 
   @doc false
-  @spec request(String.t(), map(), String.t()) ::
-          {:ok, response :: map()} | {:error, reason :: atom()}
-  def request(image_url, query_params, service_path \\ "analyze") do
-    path = [path(), service_path] |> Path.join()
-
-    url =
-      %URI{
-        host: base_url(),
-        scheme: scheme(),
-        path: path,
-        query: URI.encode_query(query_params)
-      }
-      |> URI.to_string()
-
-    headers = [
-      {
-        String.to_charlist(header_name()),
-        String.to_charlist(subscription_key())
-      }
-    ]
-
-    content_type = 'application/json;'
-    payload = Jason.encode!(%{url: image_url})
-
-    request = {
-      url,
-      headers,
-      content_type,
-      payload
+  def request(path, image_url, query) do
+    url = %URI{
+      scheme: scheme(),
+      authority: base_url(),
+      host: base_url(),
+      port: 443,
+      path: path,
+      query: URI.encode_query(query)
     }
 
-    case :httpc.request(:post, request, [], []) do
-      {:ok, {_status_code, _headers, response}} ->
-        {:ok, Jason.decode!(response)}
+    body = Jason.encode!(%{url: image_url})
+    options = [ssl: [{:versions, [:"tlsv1.2"]}], recv_timeout: 30_000]
+
+    headers = [
+      {"Content-Type", "application/json"},
+      {header_name(), subscription_key()}
+    ]
+
+    request = HTTPoison.post(url, body, headers, options)
+
+    case request do
+      {:ok, response} ->
+        {:ok, Jason.decode!(response.body)}
 
       {:error, reason} ->
         {:error, reason}

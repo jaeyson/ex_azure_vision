@@ -14,10 +14,8 @@ defmodule ExAzureVision.ImageAnalysis do
 
       query_params =
         %{
-          "visualFeatures" => "Categories,Adult,Tags,Description,Faces,Objects",
-          "details" => "Landmarks",
-          "language" => "en",
-          "model-version" => "latest"
+          visualfeatures: "Categories,Adult,Tags,Description,Faces,Objects",
+          details: "Landmarks"
         }
 
       iex> annotate_image(image_url, query_params)
@@ -27,8 +25,8 @@ defmodule ExAzureVision.ImageAnalysis do
       }
   """
   @doc since: "0.1.0"
-  @spec analyze(String.t(), map()) :: {:ok, response :: map()} | {:error, reason :: atom()}
-  def analyze(image_url, query_params) do
-    HttpClient.request(image_url, query_params)
+  def analyze(image_url, query) do
+    path = "/vision/v3.2/analyze"
+    HttpClient.request(path, image_url, query)
   end
 end

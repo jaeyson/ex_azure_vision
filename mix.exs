@@ -2,7 +2,7 @@ defmodule ExAzureVision.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/jaeyson/ex_azure_vision"
-  @version "0.1.0"
+  @version "0.1.1"
 
   def project do
     [
@@ -33,7 +33,8 @@ defmodule ExAzureVision.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:jason, "~> 1.4"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.29.1", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.29.1", only: :dev, runtime: false},
+      {:httpoison, "~> 1.8"}
     ]
   end
 
