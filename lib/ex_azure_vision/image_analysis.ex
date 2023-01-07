@@ -21,6 +21,7 @@ defmodule ExAzureVision.ImageAnalysis do
       iex> annotate_image(image_url, query_params)
       %{
         "categories" => [...],
+        "description" => [...],
         ...
       }
   """

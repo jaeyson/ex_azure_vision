@@ -1,6 +1,5 @@
 defmodule ExAzureVision.HttpClient do
   @moduledoc false
-  # use Tesla
 
   def header_name, do: Application.get_env(:ex_azure_vision, :header_name)
   def subscription_key, do: Application.get_env(:ex_azure_vision, :subscription_key)
@@ -19,7 +18,19 @@ defmodule ExAzureVision.HttpClient do
     }
 
     body = Jason.encode!(%{url: image_url})
-    options = [ssl: [{:versions, [:"tlsv1.2"]}], recv_timeout: 30_000]
+
+    options = [
+      ssl: [
+        {:versions, [:"tlsv1.2"]},
+        verify: :verify_peer,
+        cacerts: :public_key.cacerts_get(),
+        customize_hostname_check: [
+          match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
+        ]
+      ],
+      timeout: 5_000,
+      recv_timeout: 5_000
+    ]
 
     headers = [
       {"Content-Type", "application/json"},

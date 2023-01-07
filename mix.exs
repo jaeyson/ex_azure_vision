@@ -2,7 +2,7 @@ defmodule ExAzureVision.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/jaeyson/ex_azure_vision"
-  @version "0.1.1"
+  @version "0.1.2"
 
   def project do
     [
@@ -22,7 +22,7 @@ defmodule ExAzureVision.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :public_key]
     ]
   end
 

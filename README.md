@@ -10,7 +10,7 @@ by adding `ex_azure_vision` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_azure_vision, "~> 0.1.1"}
+    {:ex_azure_vision, "~> 0.1.2"}
   ]
 end
 ```
