@@ -25,4 +25,7 @@ ex_azure_vision-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
-.DS_Store
+# Misc.
+/.elixir_ls/
+**.DS_Store
+*.env

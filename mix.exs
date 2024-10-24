@@ -2,7 +2,7 @@ defmodule ExAzureVision.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/jaeyson/ex_azure_vision"
-  @version "0.1.2"
+  @version "0.1.3"
 
   def project do
     [
@@ -32,9 +32,9 @@ defmodule ExAzureVision.MixProject do
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:jason, "~> 1.4"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.29.1", only: :dev, runtime: false},
-      {:httpoison, "~> 1.8"}
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false},
+      {:req, "~> 0.5"}
     ]
   end
 
@@ -46,9 +46,9 @@ defmodule ExAzureVision.MixProject do
       source_url: @source_url,
       canonical: "http://hexdocs.pm/ex_azure_vision",
       extras: [
-        "README.md",
         "CHANGELOG.md",
-        "LICENSE"
+        "LICENSE.md": [title: "License"],
+        "README.md": [title: "Overview"]
       ]
     ]
   end
@@ -58,7 +58,8 @@ defmodule ExAzureVision.MixProject do
       maintainers: ["Jaeyson Anthony Y."],
       licenses: ["MIT"],
       links: %{
-        "Github" => @source_url
+        Github: @source_url,
+        Changelog: "https://hexdocs.pm/ex_azure_vision/changelog.html"
       }
     ]
   end

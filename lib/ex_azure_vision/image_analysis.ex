@@ -8,6 +8,7 @@ defmodule ExAzureVision.ImageAnalysis do
 
   @doc """
   Analyzes the image using url. Returns Jason decoded value or error message.
+  Currently it uses v3.2, please refer to this link: https://learn.microsoft.com/en-us/rest/api/computervision/analyze-image/analyze-image?view=rest-computervision-v3.2&tabs=HTTP
 
   ## Examples
       image_url = "https://example.gif/sample.jpg"
@@ -26,6 +27,7 @@ defmodule ExAzureVision.ImageAnalysis do
       }
   """
   @doc since: "0.1.0"
+  @spec analyze(String.t(), map()) :: {:ok, any()} | {:error, any()}
   def analyze(image_url, query) do
     path = "/vision/v3.2/analyze"
     HttpClient.request(path, image_url, query)
